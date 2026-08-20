@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravity Switch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">🪐 Gravity Switch</span>
+    <button id="helpBtn" class="help-btn" type="button">? Help</button>
+  </nav>
+
+  <main>
+    <section class="controls-panel">
+      <div class="controls">
+        <label>Level<select id="levelSelect"></select></label>
+        <label>Theme<select id="themeSelect"><option value="teal">Teal Orbit</option><option value="violet">Violet Pulse</option><option value="amber">Amber Star</option></select></label>
+        <label>Explorer<input id="playerName" maxlength="20" placeholder="Player" autocomplete="off"></label>
+      </div>
+      <div class="controls-actions"><button id="startBtn" type="button">▶ Start Mission</button><button id="pauseBtn" type="button" disabled>⏸ Pause</button><button id="resetBtn" class="secondary-btn" type="button" disabled>↻ Reset</button></div>
+    </section>
+    <div class="stats"><span>◆ Crystals: <b id="crystalsEl">0/0</b></span><span>↻ Moves: <b id="movesEl">0</b></span><span>🕛 Time: <b id="timeEl">00:00</b></span><span>★ Best: <b id="bestEl">0</b></span></div>
+    <p id="status" class="status">Choose a level, then start your mission. Change gravity with the arrow keys.</p>
+    <div class="game-shell"><canvas id="gameCanvas" width="720" height="528" aria-label="Gravity Switch game board"></canvas></div>
+    <div class="gravity-controls" aria-label="Gravity controls"><button data-gravity="up" type="button">↑</button><div><button data-gravity="left" type="button">←</button><button id="centerGravity" type="button">✦</button><button data-gravity="right" type="button">→</button></div><button data-gravity="down" type="button">↓</button></div>
+    <p class="hint-line"><kbd>A</kbd>/<kbd>D</kbd> drift sideways · <kbd>Arrow keys</kbd> switch gravity · collect all ◆ before reaching the exit.</p>
+    <section class="history"><h2>🏆 Gravity Switch Records</h2><ul id="scoresList"><li>Loading scores…</li></ul></section>
+  </main>
+
+  <div class="overlay" id="pauseOverlay"><div class="dialog"><h2>⏸ Mission Paused</h2><p>Your orbit is frozen.</p><button id="resumeBtn" type="button">▶ Resume</button></div></div>
+  <div class="overlay" id="resultOverlay"><div class="dialog"><h2 id="resultTitle"></h2><p id="resultStats"></p><button id="playAgainBtn" type="button">Play Again</button></div></div>
+  <div class="overlay" id="helpOverlay"><div class="dialog"><h2>⌨️ Mission Controls</h2><p><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> switch gravity · <kbd>A</kbd>/<kbd>D</kbd> drift · <kbd>R</kbd> reset · <kbd>P</kbd>/<kbd>Esc</kbd> pause</p><button id="helpCloseBtn" type="button">Got it</button></div></div>
+  <script src="script.js"></script>
+</body>
+</html>

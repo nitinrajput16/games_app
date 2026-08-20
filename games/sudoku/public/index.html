@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">🔢 Sudoku</span>
+    <button id="helpBtn" class="help-btn" title="Keyboard shortcuts (?)">? Help</button>
+  </nav>
+
+  <main>
+    <!-- Customization / controls -->
+    <section class="controls-panel">
+      <div class="controls">
+        <div class="control-field"><label for="levelSelect">Level</label><select id="levelSelect"></select></div>
+        <div class="control-field">
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty">
+            <option value="easy" selected>Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="cyan" selected>Cyan</option>
+            <option value="ocean">Ocean</option>
+            <option value="neon">Neon</option>
+            <option value="gold">Gold</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="playerName">Name</label>
+          <input type="text" id="playerName" maxlength="20" placeholder="Player" autocomplete="off">
+        </div>
+
+        <div class="control-field">
+          <label for="autoCheck">Auto Check</label>
+          <select id="autoCheck">
+            <option value="on" selected>On</option>
+            <option value="off">Off</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="controls-actions">
+        <button id="startBtn">▶ New Puzzle</button>
+        <button id="pauseBtn" disabled>⏸ Pause</button>
+      </div>
+    </section>
+
+    <!-- Live stats -->
+    <div class="stats">
+      <span>🕛 Time: <span id="timeEl">00:00</span></span>
+      <span>❌ Mistakes: <span id="mistakesEl">0</span></span>
+      <span>💡 Hints Left: <span id="hintsEl">3</span></span>
+      <span>👑 Best: <span id="bestEl">0</span></span>
+    </div>
+
+    <div class="status" id="status">Pick a difficulty, then hit "New Puzzle". Press ? for shortcuts.</div>
+
+    <!-- Sudoku board -->
+    <div class="board-wrap">
+      <div class="board" id="board"></div>
+    </div>
+
+    <!-- Numpad -->
+    <div class="numpad" id="numpad"></div>
+
+    <div class="toolbar">
+      <button id="eraseBtn" class="tool-btn" disabled>⌫ Erase</button>
+      <button id="notesBtn" class="tool-btn" disabled>✏️ Notes: Off</button>
+      <button id="hintBtn" class="tool-btn" disabled>💡 Hint</button>
+    </div>
+
+    <!-- Leaderboard (needs Mongo; graceful fallback otherwise) -->
+    <div class="history">
+      <h2>🏆 Sudoku Leaderboard</h2>
+      <ul id="scoresList"><li>Loading scores…</li></ul>
+    </div>
+  </main>
+
+  <!-- Pause overlay -->
+  <div class="win-overlay" id="pauseOverlay">
+    <div class="win-card">
+      <h2>⏸ Paused</h2>
+      <p>Press <kbd>Esc</kbd> or <kbd>P</kbd>, or click Resume to continue.</p>
+      <button id="resumeBtn">▶ Resume</button>
+    </div>
+  </div>
+
+  <!-- Win overlay -->
+  <div class="win-overlay" id="winOverlay">
+    <div class="win-card">
+      <h2>🎉 Puzzle Solved!</h2>
+      <p id="winStats"></p>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="win-overlay" id="helpOverlay">
+    <div class="win-card help-card">
+      <h2>⌨️ Keyboard Shortcuts</h2>
+      <ul class="shortcut-list">
+        <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> <span>Move selection</span></li>
+        <li><kbd>1</kbd> – <kbd>9</kbd> <span>Enter number</span></li>
+        <li><kbd>Backspace</kbd> / <kbd>0</kbd> <span>Erase cell</span></li>
+        <li><kbd>N</kbd> <span>Toggle notes mode</span></li>
+        <li><kbd>C</kbd> <span>Toggle auto check</span></li>
+        <li><kbd>H</kbd> <span>Use a hint</span></li>
+        <li><kbd>R</kbd> <span>New puzzle</span></li>
+        <li><kbd>Esc</kbd> / <kbd>P</kbd> <span>Pause / Resume</span></li>
+        <li><kbd>?</kbd> <span>Toggle this help</span></li>
+      </ul>
+      <button id="helpCloseBtn">Got it</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+header {
+  padding: 24px;
+  text-align: center;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+}
+
+header h1 { font-size: 1.8rem; color: #38bdf8; }
+
+/* ---------- Top navigation ---------- */
+.game-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.back-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.back-link:hover { color: #38bdf8; }
+
+.nav-title {
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+  font-size: 1.1rem;
+}
+
+.help-btn {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 999px;
+}
+
+.help-btn:hover:not(:disabled) { background: rgba(56, 189, 248, 0.25); color: #7dd3fc; }
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controls label { font-weight: 600; }
+
+button {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+button:hover:not(:disabled) { background: #0ea5e9; transform: translateY(-2px); }
+button:disabled { background: #475569; cursor: not-allowed; }
+
+.stats {
+  display: flex;
+  gap: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #facc15;
+}
+
+.status {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  min-height: 20px;
+  text-align: center;
+}
+
+.canvas-wrap {
+  max-width: 100%;
+  overflow: auto;
+}
+
+/* Always keep the maze centered horizontally */
+canvas {
+  background: #1e293b;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* In-game focus: center the maze in the viewport + glowing ring */
+body.in-game .canvas-wrap {
+  min-height: 58vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body.in-game canvas {
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.55),
+    0 0 30px rgba(56, 189, 248, 0.25),
+    0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* D-pad for mobile */
+.dpad {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dpad-row { display: flex; gap: 6px; }
+
+.dpad-btn {
+  width: 50px;
+  height: 50px;
+  font-size: 1.3rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+  .dpad { display: flex; }
+}
+
+.history { width: 100%; }
+
+.history h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #38bdf8;
+}
+
+.history ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history li {
+  background: #1e293b;
+  padding: 10px 14px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.history li:hover { background: #334155; }
+
+.win-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.win-overlay.active { display: flex; }
+
+.win-card {
+  background: #1e293b;
+  padding: 32px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.win-card h2 { color: #facc15; margin-bottom: 12px; font-size: 1.6rem; }
+.win-card p { margin-bottom: 20px; color: #cbd5e1; }
+/* ---------- Overlays & shortcuts ---------- */
+.win-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.help-card {
+  max-width: 480px;
+  width: 100%;
+}
+
+.help-card h2 { color: #38bdf8; }
+
+kbd {
+  display: inline-block;
+  background: #0f172a;
+  border: 1px solid #475569;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+}
+
+.shortcut-list {
+  list-style: none;
+  margin: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.shortcut-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.shortcut-list li span {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}

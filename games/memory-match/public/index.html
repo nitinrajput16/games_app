@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Match</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">🧠 Memory Match</span>
+    <button id="helpBtn" class="help-btn" title="Keyboard shortcuts (?)">? Help</button>
+  </nav>
+
+  <main>
+    <!-- Customization / controls -->
+    <section class="controls-panel">
+      <div class="controls">
+        <div class="control-field"><label for="levelSelect">Level</label><select id="levelSelect"></select></div>
+        <div class="control-field">
+          <label for="gridSize">Grid Size</label>
+          <select id="gridSize">
+            <option value="4x4" selected>Easy · 4×4</option>
+            <option value="4x6">Medium · 4×6</option>
+            <option value="6x6">Hard · 6×6</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="classic" selected>Classic</option>
+            <option value="pink">Neon Pink</option>
+            <option value="gold">Gold</option>
+            <option value="ocean">Ocean</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="playerName">Name</label>
+          <input type="text" id="playerName" maxlength="20" placeholder="Player" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="controls-actions">
+        <button id="startBtn">▶ New Game</button>
+        <button id="pauseBtn" disabled>⏸ Pause</button>
+      </div>
+    </section>
+
+    <!-- Live stats -->
+    <div class="stats">
+      <span>🕛 Time: <span id="timerEl">0.0s</span></span>
+      <span>👣 Moves: <span id="movesEl">0</span></span>
+      <span>✅ Pairs: <span id="pairsEl">0</span></span>
+      <span>👑 Best: <span id="bestEl">0</span></span>
+    </div>
+
+    <div class="status" id="status">Pick a grid size, then hit "New Game". Press ? for shortcuts.</div>
+
+    <div class="grid-wrap">
+      <div class="card-grid" id="cardGrid"></div>
+    </div>
+
+    <!-- Leaderboard (needs Mongo; graceful fallback otherwise) -->
+    <div class="history">
+      <h2>🏆 Memory Leaderboard</h2>
+      <ul id="scoresList"><li>Loading scores…</li></ul>
+    </div>
+  </main>
+
+  <!-- Pause overlay -->
+  <div class="win-overlay" id="pauseOverlay">
+    <div class="win-card">
+      <h2>⏸ Paused</h2>
+      <p>Press <kbd>Esc</kbd> or click Resume to continue.</p>
+      <button id="resumeBtn">▶ Resume</button>
+    </div>
+  </div>
+
+  <!-- Win overlay -->
+  <div class="win-overlay" id="winOverlay">
+    <div class="win-card">
+      <h2>🎉 All Matched!</h2>
+      <p id="winStats"></p>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="win-overlay" id="helpOverlay">
+    <div class="win-card help-card">
+      <h2>⌨️ Keyboard Shortcuts</h2>
+      <ul class="shortcut-list">
+        <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> <span>Move highlight</span></li>
+        <li><kbd>Enter</kbd> / <kbd>Space</kbd> <span>Flip selected card</span></li>
+        <li><kbd>Esc</kbd> / <kbd>P</kbd> <span>Pause / Resume</span></li>
+        <li><kbd>N</kbd> <span>New game</span></li>
+        <li><kbd>?</kbd> <span>Toggle this help</span></li>
+      </ul>
+      <button id="helpCloseBtn">Got it</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

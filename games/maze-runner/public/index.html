@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze Generator & Solver</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">🕹️ Maze Runner</span>
+    <button id="helpBtn" class="help-btn" title="Keyboard shortcuts (?)">? Help</button>
+  </nav>
+
+  <main>
+    <div class="controls">
+      <label for="levelSelect">Level</label>
+      <select id="levelSelect" aria-label="Campaign level"></select>
+      <label for="difficulty">Difficulty</label>
+      <input type="range" id="difficulty" min="1" max="5" value="3">
+      <span id="difficultyValue">3</span>
+
+      <button id="generateBtn">New Maze</button>
+      <button id="hintBtn" disabled>Show Hint Path</button>
+      <button id="resetBtn" disabled>Reset Position</button>
+      <button id="pauseBtn" disabled>⏸ Pause</button>
+    </div>
+
+    <div class="stats">
+      <span>⏱ <span id="timer">0.0s</span></span>
+      <span>👣 Moves: <span id="moveCount">0</span></span>
+    </div>
+
+    <div class="status" id="status">Click "New Maze" to begin. Use arrow keys / WASD to move. Press ? for shortcuts.</div>
+
+    <div class="canvas-wrap">
+      <canvas id="mazeCanvas"></canvas>
+    </div>
+
+    <!-- Mobile D-pad -->
+    <div class="dpad">
+      <button class="dpad-btn" data-dir="up">↑</button>
+      <div class="dpad-row">
+        <button class="dpad-btn" data-dir="left">←</button>
+        <button class="dpad-btn" data-dir="down">↓</button>
+        <button class="dpad-btn" data-dir="right">→</button>
+      </div>
+    </div>
+
+    <div class="history">
+      <h2>Recent Mazes</h2>
+      <ul id="historyList"></ul>
+    </div>
+  </main>
+
+  <!-- Pause overlay -->
+  <div class="win-overlay" id="pauseOverlay">
+    <div class="win-card">
+      <h2>⏸ Paused</h2>
+      <p>Press <kbd>Esc</kbd> or click Resume to keep going.</p>
+      <button id="resumeBtn">▶ Resume</button>
+    </div>
+  </div>
+
+  <div class="win-overlay" id="winOverlay">
+    <div class="win-card">
+      <h2>🎉 Solved!</h2>
+      <p id="winStats"></p>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="win-overlay" id="helpOverlay">
+    <div class="win-card help-card">
+      <h2>⌨️ Keyboard Shortcuts</h2>
+      <ul class="shortcut-list">
+        <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> / <kbd>WASD</kbd> <span>Move</span></li>
+        <li><kbd>Esc</kbd> <span>Pause / Resume</span></li>
+        <li><kbd>N</kbd> / <kbd>Space</kbd> / <kbd>Enter</kbd> <span>New maze</span></li>
+        <li><kbd>H</kbd> <span>Show hint path</span></li>
+        <li><kbd>R</kbd> <span>Reset position</span></li>
+        <li><kbd>?</kbd> <span>Toggle this help</span></li>
+      </ul>
+      <button id="helpCloseBtn">Got it</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

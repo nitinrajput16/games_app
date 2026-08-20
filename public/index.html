@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game HUB — Your Game Library</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar">
+    <a href="/" class="brand">
+      <span class="brand-logo">🎮</span>
+      <span class="brand-name">Game<em>HUB</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="#library" class="nav-link">Library</a>
+      <a href="#live-now" class="nav-link">Live Now</a>
+      <span id="navCount" class="nav-badge">0 games</span>
+    </div>
+  </nav>
+
+  <!-- ============ HERO / FEATURED ============ -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">✦ YOUR GAME ARCADE</span>
+      <h1 id="heroTitle">Step Into My World of Games</h1>
+      <p id="heroDesc">
+        A growing collection of online games I'm building. Play the latest,
+        follow new drops and jump straight into the action.
+      </p>
+      <div class="hero-actions">
+        <a href="#library" class="btn btn-primary">🎮 Browse Library</a>
+        <button id="featuredLaunchBtn" class="btn btn-ghost" disabled>▶ Featured: Loading…</button>
+      </div>
+    </div>
+    <div class="hero-art" id="heroArt" aria-hidden="true">🎮</div>
+  </section>
+
+  <!-- ============ LIBRARY ============ -->
+  <main class="library" id="library">
+    <header class="library-header">
+      <h2>Game Library</h2>
+      <p id="libraryCount" class="muted">Loading games…</p>
+    </header>
+
+    <!-- Search + filters -->
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search games…" autocomplete="off">
+      </div>
+      <div class="filters" id="filterChips"></div>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid" id="grid"></div>
+    <p class="empty-state" id="emptyState" hidden>No games match your search. 🎮</p>
+  </main>
+
+  <footer class="footer">
+    <p>Game<em>HUB</em> — your arcade of in-progress creations.</p>
+    <p class="muted">Built with 💙 | More games landing soon.</p>
+  </footer>
+
+  <!-- Toast for coming-soon games -->
+  <div class="toast" id="toast">⏳ Coming soon — stay tuned!</div>
+
+  <!-- Modal for live-game details -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card">
+      <h2 id="modalTitle">Game</h2>
+      <p id="modalDesc" class="muted"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-actions">
+        <a id="modalPlay" class="btn btn-primary" href="#" target="_blank" rel="noopener">▶ Play Now</a>
+        <button id="modalClose" class="btn btn-ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

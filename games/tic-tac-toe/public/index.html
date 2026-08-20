@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">⭕ Tic-Tac-Toe</span>
+    <button id="helpBtn" class="help-btn" type="button">? Help</button>
+  </nav>
+
+  <main>
+    <section class="controls-panel">
+      <div class="controls">
+        <label>Level<select id="levelSelect"></select></label>
+        <label>Mode<select id="mode"><option value="computer">Vs Computer</option><option value="local">Two Players</option></select></label>
+        <label>AI Difficulty<select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard" selected>Hard</option></select></label>
+        <label>Your mark<select id="mark"><option value="X" selected>X</option><option value="O">O</option></select></label>
+        <label>Name<input id="playerName" maxlength="20" placeholder="Player" autocomplete="off"></label>
+      </div>
+      <div class="controls-actions"><button id="startBtn" type="button">▶ New Game</button><button id="pauseBtn" type="button" disabled>⏸ Pause</button></div>
+    </section>
+
+    <div class="stats"><span>Time: <b id="timeEl">00:00</b></span><span>Moves: <b id="movesEl">0</b></span><span>Wins: <b id="winsEl">0</b></span><span>Best: <b id="bestEl">0</b></span></div>
+    <p class="status" id="status">Choose a mode, then start a game. Press ? for shortcuts.</p>
+    <section class="board" id="board" aria-label="Tic-Tac-Toe board"></section>
+    <button id="resetBoardBtn" class="secondary-btn" type="button" disabled>↻ Reset Round</button>
+
+    <section class="history"><h2>🏆 Tic-Tac-Toe Leaderboard</h2><ul id="scoresList"><li>Loading scores…</li></ul></section>
+  </main>
+
+  <div class="overlay" id="pauseOverlay"><div class="dialog"><h2>⏸ Paused</h2><p>The board is waiting for you.</p><button id="resumeBtn" type="button">▶ Resume</button></div></div>
+  <div class="overlay" id="resultOverlay"><div class="dialog"><h2 id="resultTitle"></h2><p id="resultStats"></p><button id="playAgainBtn" type="button">Play Again</button></div></div>
+  <div class="overlay" id="helpOverlay"><div class="dialog help-dialog"><h2>⌨️ Shortcuts</h2><p><kbd>1</kbd>-<kbd>9</kbd> place a mark · <kbd>Arrow keys</kbd> move · <kbd>Enter</kbd> place · <kbd>Esc</kbd>/<kbd>P</kbd> pause · <kbd>R</kbd> new game</p><button id="helpCloseBtn" type="button">Got it</button></div></div>
+  <script src="script.js"></script>
+</body>
+</html>

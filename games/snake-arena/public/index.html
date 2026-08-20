@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <nav class="game-nav">
+    <a href="/" class="back-link">← Back to Library</a>
+    <span class="nav-title">🐍 Snake Arena</span>
+    <button id="helpBtn" class="help-btn" title="Keyboard shortcuts (?)">? Help</button>
+  </nav>
+
+  <main>
+    <!-- Customization controls -->
+    <section class="controls-panel">
+      <div class="controls">
+        <div class="control-field"><label for="levelSelect">Level</label><select id="levelSelect"></select></div>
+        <div class="control-field">
+          <label for="speed">Speed</label>
+          <input type="range" id="speed" min="1" max="5" value="3">
+          <span id="speedValue">Normal</span>
+        </div>
+
+        <div class="control-field">
+          <label for="boardSize">Board Size</label>
+          <select id="boardSize">
+            <option value="24">Small</option>
+            <option value="32" selected>Medium</option>
+            <option value="44">Large</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="foodCount">Food Count</label>
+          <input type="range" id="foodCount" min="1" max="5" value="2">
+          <span id="foodCountValue">2</span>
+        </div>
+
+        <div class="control-field">
+          <label for="wallMode">Walls</label>
+          <select id="wallMode">
+            <option value="wrap" selected>Wrap Around</option>
+            <option value="die">Death</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="classic" selected>Classic</option>
+            <option value="neon">Neon</option>
+            <option value="gold">Gold</option>
+            <option value="ocean">Ocean</option>
+          </select>
+        </div>
+
+        <div class="control-field">
+          <label for="playerName">Name</label>
+          <input type="text" id="playerName" maxlength="20" placeholder="Player" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="controls-actions">
+        <button id="startBtn">▶ Start Game</button>
+        <button id="pauseBtn" disabled>⏸ Pause</button>
+      </div>
+    </section>
+
+    <!-- Live stats -->
+    <div class="stats">
+      <span>🪙 Score: <span id="scoreEl">0</span></span>
+      <span>🐛 Length: <span id="lengthEl">3</span></span>
+      <span>👑 Best: <span id="bestEl">0</span></span>
+    </div>
+
+    <div class="status" id="status">Configure your game, then hit "Start Game". Use arrow keys / WASD. Press ? for shortcuts.</div>
+
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Mobile D-pad -->
+    <div class="dpad">
+      <button class="dpad-btn" data-dir="up">↑</button>
+      <div class="dpad-row">
+        <button class="dpad-btn" data-dir="left">←</button>
+        <button class="dpad-btn" data-dir="down">↓</button>
+        <button class="dpad-btn" data-dir="right">→</button>
+      </div>
+    </div>
+
+    <!-- Leaderboard (needs Mongo; graceful fallback otherwise) -->
+    <div class="history">
+      <h2>🏆 Leaderboard</h2>
+      <ul id="scoresList"><li>Loading scores…</li></ul>
+    </div>
+  </main>
+
+  <!-- Pause overlay -->
+  <div class="win-overlay" id="pauseOverlay">
+    <div class="win-card">
+      <h2>⏸ Paused</h2>
+      <p>Press <kbd>Esc</kbd> or <kbd>P</kbd>, or click Resume to continue.</p>
+      <button id="resumeBtn">▶ Resume</button>
+    </div>
+  </div>
+
+  <!-- Game over overlay -->
+  <div class="win-overlay" id="gameOverOverlay">
+    <div class="win-card">
+      <h2>💀 Game Over</h2>
+      <p id="gameOverStats"></p>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="win-overlay" id="helpOverlay">
+    <div class="win-card help-card">
+      <h2>⌨️ Keyboard Shortcuts</h2>
+      <ul class="shortcut-list">
+        <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> / <kbd>WASD</kbd> <span>Move snake</span></li>
+        <li><kbd>Esc</kbd> / <kbd>P</kbd> <span>Pause / Resume</span></li>
+        <li><kbd>Space</kbd> / <kbd>Enter</kbd> <span>Start or restart game</span></li>
+        <li><kbd>R</kbd> <span>Quick restart</span></li>
+        <li><kbd>?</kbd> <span>Toggle this help</span></li>
+      </ul>
+      <button id="helpCloseBtn">Got it</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
