@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game HUB — Your Game Library</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/game-theme.css">
 </head>
 <body>
   <!-- ============ NAVBAR ============ -->
@@ -53,7 +54,14 @@
       <div class="filters" id="filterChips"></div>
     </div>
 
+    <section class="discovery" aria-label="Game discovery">
+      <div class="shelf" id="popularShelf"><div class="shelf-heading"><h2>Popular right now</h2><span>Quick picks from the arcade</span></div><div class="shelf-grid" id="popularGrid"></div></div>
+      <div class="shelf"><div class="shelf-heading"><h2>New releases</h2><span>Freshly added to GameHUB</span></div><div class="shelf-grid" id="newGrid"></div></div>
+      <div class="shelf" id="recentShelf" hidden><div class="shelf-heading"><h2>Recently played</h2><span>Jump back in</span></div><div class="shelf-grid" id="recentGrid"></div></div>
+    </section>
+
     <!-- Cards -->
+    <div class="library-subheading"><h2>All games</h2><span>Search the complete collection</span></div>
     <div class="grid" id="grid"></div>
     <p class="empty-state" id="emptyState" hidden>No games match your search. 🎮</p>
   </main>

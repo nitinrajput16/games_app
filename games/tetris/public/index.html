@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tetris | GameHUB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/game-theme.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar"><a href="/" class="back-link">← Back to Library</a><span class="eyebrow">GAMEHUB / ARCADE</span></header>
+    <section class="intro"><div><p class="eyebrow">STACK THE MOMENT</p><h1>Tetris</h1><p>Fit the pieces, clear the lines and stay ahead of the falling stack.</p></div><button id="helpBtn" class="ghost-btn" type="button">? Controls</button></section>
+    <section class="game-layout">
+      <div class="game-card"><canvas id="board" width="300" height="600" aria-label="Tetris board"></canvas><div id="status" class="status">Press Start to play.</div></div>
+      <aside class="side-card">
+        <div class="stats"><span>Score <b id="score">0</b></span><span>Lines <b id="lines">0</b></span><span>Level <b id="level">1</b></span><span>Best <b id="best">0</b></span></div>
+        <h2>Next piece</h2><canvas id="next" width="120" height="120"></canvas>
+        <label>Player name<input id="playerName" maxlength="20" placeholder="Player" autocomplete="off"></label>
+        <div class="actions"><button id="startBtn" class="primary-btn" type="button">▶ Start</button><button id="pauseBtn" class="ghost-btn" type="button" disabled>⏸ Pause</button><button id="resetBtn" class="ghost-btn" type="button">↻ Reset</button></div>
+      </aside>
+    </section>
+    <section class="help-panel" id="helpPanel" hidden><h2>Controls</h2><p>← → move · ↑ rotate · ↓ soft drop · Space hard drop · P pause · R reset</p></section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

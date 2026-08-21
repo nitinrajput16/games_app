@@ -1,6 +1,33 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Maze = require('../models/Maze');
+
+// Keep the game playable when MongoDB is not configured or is temporarily down.
+// These entries are process-local and are intentionally only a fallback; MongoDB
+// remains the durable history store when it is available.
+const localMazes = new Map();
+let localMazeSequence = 0;
+
+function databaseIsReady() {
+  return mongoose.connection.readyState === 1;
+}
+
+function createLocalId() {
+  localMazeSequence += 1;
+  return `local-${Date.now()}-${localMazeSequence}`;
+}
+
+function localMazeSummary(maze) {
+  return {
+    _id: maze._id,
+    width: maze.width,
+    height: maze.height,
+    difficulty: maze.difficulty,
+    solutionLength: maze.solutionLength ?? null,
+    createdAt: maze.createdAt
+  };
+}
 
 // ---------- Maze generation (recursive backtracker) ----------
 function generateMaze(width, height) {
@@ -78,17 +105,24 @@ function solveMaze(grid, start, end) {
 
 // ---------- Routes ----------
 
-// Generate a new maze and persist it
+// Generate a new maze and persist it when MongoDB is available.
 router.post('/generate', async (req, res) => {
   try {
     const difficulty = Math.min(Math.max(parseInt(req.body.difficulty) || 3, 1), 5);
     const size = difficulty * 6 + 9; // scales with difficulty
     const { grid, width, height, start, end } = generateMaze(size, size);
 
-    const maze = new Maze({ width, height, difficulty, grid, start, end });
-    await maze.save();
+    if (databaseIsReady()) {
+      const maze = new Maze({ width, height, difficulty, grid, start, end });
+      await maze.save();
+      return res.json({ id: String(maze._id), width, height, difficulty, grid, start, end });
+    }
 
-    res.json({ id: maze._id, width, height, difficulty, grid, start, end });
+    const id = createLocalId();
+    const maze = { _id: id, width, height, difficulty, grid, start, end, solutionLength: null, createdAt: new Date() };
+    localMazes.set(id, maze);
+    while (localMazes.size > 20) localMazes.delete(localMazes.keys().next().value);
+    return res.json({ id, width, height, difficulty, grid, start, end });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -97,14 +131,16 @@ router.post('/generate', async (req, res) => {
 // Solve a maze by id
 router.post('/solve/:id', async (req, res) => {
   try {
-    const maze = await Maze.findById(req.params.id);
+    const maze = req.params.id.startsWith('local-')
+      ? localMazes.get(req.params.id)
+      : databaseIsReady() ? await Maze.findById(req.params.id) : null;
     if (!maze) return res.status(404).json({ error: 'Maze not found' });
 
     const path = solveMaze(maze.grid, maze.start, maze.end);
     if (!path) return res.status(422).json({ error: 'No solution found' });
 
     maze.solutionLength = path.length;
-    await maze.save();
+    if (!req.params.id.startsWith('local-')) await maze.save();
 
     res.json({ path, length: path.length });
   } catch (err) {
@@ -127,6 +163,9 @@ router.post('/solve-inline', (req, res) => {
 // Get maze history
 router.get('/history', async (req, res) => {
   try {
+    if (!databaseIsReady()) {
+      return res.json(Array.from(localMazes.values()).reverse().map(localMazeSummary));
+    }
     const mazes = await Maze.find()
       .select('-grid')
       .sort({ createdAt: -1 })
@@ -140,7 +179,9 @@ router.get('/history', async (req, res) => {
 // Get a single maze by id
 router.get('/:id', async (req, res) => {
   try {
-    const maze = await Maze.findById(req.params.id);
+    const maze = req.params.id.startsWith('local-')
+      ? localMazes.get(req.params.id)
+      : databaseIsReady() ? await Maze.findById(req.params.id) : null;
     if (!maze) return res.status(404).json({ error: 'Maze not found' });
     res.json(maze);
   } catch (err) {

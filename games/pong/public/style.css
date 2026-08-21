@@ -1,0 +1,1 @@
+.game-card{width:100%}.scorebar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--hub-muted)}.scorebar b{color:var(--hub-text);font-size:1.4rem}.game-card canvas{display:block;width:100%;height:auto;margin-top:16px;border-radius:14px;background:#050b16;border:1px solid var(--hub-border)}
