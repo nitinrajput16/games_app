@@ -192,6 +192,19 @@ html { scroll-behavior: smooth; }
 
 /* toolbar */
 .toolbar { display: flex; flex-direction: column; gap: 14px; margin-bottom: 34px; }
+
+.discovery { display: grid; gap: 30px; margin-bottom: 42px; }
+.shelf { min-width: 0; }
+.shelf-heading, .library-subheading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.shelf-heading h2, .library-subheading h2 { font-size: 1.35rem; }
+.shelf-heading span, .library-subheading span { color: var(--muted); font-size: .85rem; }
+.shelf-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.shelf-grid .card { padding: 18px; }
+.shelf-grid .card-emoji { font-size: 2rem; }
+.shelf-grid .card-body h3 { font-size: 1.05rem; }
+.shelf-grid .card-desc { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.shelf-grid .card-tags { display: none; }
+.shelf-empty { color: var(--muted); padding: 18px 0; }
 .search-box {
   display: flex;
   align-items: center;
@@ -368,5 +381,6 @@ html { scroll-behavior: smooth; }
   .hero-art { display: none; }
   .library { padding: 40px 20px; }
   .grid { grid-template-columns: 1fr; }
+  .shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .navbar { padding: 12px 16px; }
 }

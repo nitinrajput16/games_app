@@ -1,0 +1,1 @@
+.coin-card{max-width:520px;width:100%;text-align:center}.coin-card #coin{font-size:7rem;margin:20px 0;filter:drop-shadow(0 12px 20px #0006)}.coin-actions{display:flex;justify-content:center;gap:12px}.coin-stats{display:flex;justify-content:center;gap:30px;color:var(--hub-muted);margin-top:24px}.coin-stats b{display:block;color:#fff;font-size:1.4rem}

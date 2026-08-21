@@ -36,9 +36,26 @@ app.use('/games/sudoku', express.static(path.join(__dirname, 'games/sudoku/publi
 app.use('/games/tic-tac-toe', express.static(path.join(__dirname, 'games/tic-tac-toe/public')));
 app.use('/games/gravity-switch', express.static(path.join(__dirname, 'games/gravity-switch/public')));
 app.use('/games/neon-circuit', express.static(path.join(__dirname, 'games/neon-circuit/public')));
+app.use('/games/tetris', express.static(path.join(__dirname, 'games/tetris/public')));
+app.use('/games/minesweeper', express.static(path.join(__dirname, 'games/minesweeper/public')));
+app.use('/games/rock-paper-scissors', express.static(path.join(__dirname, 'games/rock-paper-scissors/public')));
+app.use('/games/2048', express.static(path.join(__dirname, 'games/2048/public')));
+app.use('/games/pong', express.static(path.join(__dirname, 'games/pong/public')));
+app.use('/games/whack-a-mole', express.static(path.join(__dirname, 'games/whack-a-mole/public')));
+app.use('/games/flappy-bird', express.static(path.join(__dirname, 'games/flappy-bird/public')));
+app.use('/games/connect-four', express.static(path.join(__dirname, 'games/connect-four/public')));
+app.use('/games/hangman', express.static(path.join(__dirname, 'games/hangman/public')));
+app.use('/games/typing-speed', express.static(path.join(__dirname, 'games/typing-speed/public')));
+app.use('/games/coin-flip', express.static(path.join(__dirname, 'games/coin-flip/public')));
+app.use('/games/simon-says', express.static(path.join(__dirname, 'games/simon-says/public')));
+app.use('/games/color-match', express.static(path.join(__dirname, 'games/color-match/public')));
 
 // 3) APIs (all on this one server)
 app.get('/api/games', (req, res) => {
+  res.json({ games });
+});
+// Keep the static catalog usable if the primary API route is unavailable.
+app.get('/games-fallback.json', (req, res) => {
   res.json({ games });
 });
 app.use('/api/maze', mazeRoutes);

@@ -524,3 +524,13 @@ Make sure the Express server is running and that you opened the page through the
 ## License
 
 No license file is currently included. Add an explicit license before distributing the project outside its intended development or classroom context.
+
+## Third-party game attribution
+
+The Tetris, Minesweeper, and Rock Paper Scissors additions are license-safe adaptations of permissively licensed browser-game references. GameHUB's wrappers, catalog integration, styling, and platform code are original.
+
+- Tetris: adapted from [sandywalker/Tetris](https://github.com/sandywalker/Tetris), MIT License.
+- Minesweeper: adapted from [mayankrajendrat/minesweeper](https://github.com/mayankrajendrat/minesweeper), MIT License.
+- Rock Paper Scissors: adapted from [javitocor/Rock-Paper-Scissors-JS](https://github.com/javitocor/Rock-Paper-Scissors-JS), MIT License.
+
+The current additions use original GameHUB markup, styles, and game wrappers; no third-party fonts, sounds, or image assets were copied. Preserve the upstream MIT notices if upstream source files are redistributed separately.
