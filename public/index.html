@@ -3,90 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game HUB — Your Game Library</title>
+  <meta name="description" content="GameHUB is a cinematic arcade of experimental browser games.">
+  <title>GameHUB — Enter the Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="/game-theme.css">
+  <link rel="stylesheet" href="showcase-fixes.css">
 </head>
 <body>
-  <!-- ============ NAVBAR ============ -->
-  <nav class="navbar">
-    <a href="/" class="brand">
-      <span class="brand-logo">🎮</span>
-      <span class="brand-name">Game<em>HUB</em></span>
-    </a>
-    <div class="nav-links">
-      <a href="#library" class="nav-link">Library</a>
-      <a href="#live-now" class="nav-link">Live Now</a>
-      <span id="navCount" class="nav-badge">0 games</span>
-    </div>
-  </nav>
+  <div class="preloader" id="preloader" aria-label="Loading GameHUB"><div class="preloader-mark">GH</div><div class="preloader-line"><span></span></div><p>initializing worlds</p></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div><div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-  <!-- ============ HERO / FEATURED ============ -->
-  <section class="hero">
-    <div class="hero-content">
-      <span class="hero-eyebrow">✦ YOUR GAME ARCADE</span>
-      <h1 id="heroTitle">Step Into My World of Games</h1>
-      <p id="heroDesc">
-        A growing collection of online games I'm building. Play the latest,
-        follow new drops and jump straight into the action.
-      </p>
-      <div class="hero-actions">
-        <a href="#library" class="btn btn-primary">🎮 Browse Library</a>
-        <button id="featuredLaunchBtn" class="btn btn-ghost" disabled>▶ Featured: Loading…</button>
-      </div>
-    </div>
-    <div class="hero-art" id="heroArt" aria-hidden="true">🎮</div>
-  </section>
+  <header class="site-header">
+    <a class="brand magnetic" href="/" aria-label="GameHUB home"><span class="brand-symbol">G<span>H</span></span><span class="brand-name">GAME<span>HUB</span></span></a>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="#library">Library</a><a href="#spotlight">Spotlight</a><a href="#manifesto">About</a></nav>
+    <div class="header-actions"><span class="live-pulse"><i></i><span id="navCount">Loading</span></span><a class="header-play magnetic" href="#library">Explore <span>↘</span></a></div>
+  </header>
 
-  <!-- ============ LIBRARY ============ -->
-  <main class="library" id="library">
-    <header class="library-header">
-      <h2>Game Library</h2>
-      <p id="libraryCount" class="muted">Loading games…</p>
-    </header>
-
-    <!-- Search + filters -->
-    <div class="toolbar">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search games…" autocomplete="off">
-      </div>
-      <div class="filters" id="filterChips"></div>
-    </div>
-
-    <section class="discovery" aria-label="Game discovery">
-      <div class="shelf" id="popularShelf"><div class="shelf-heading"><h2>Popular right now</h2><span>Quick picks from the arcade</span></div><div class="shelf-grid" id="popularGrid"></div></div>
-      <div class="shelf"><div class="shelf-heading"><h2>New releases</h2><span>Freshly added to GameHUB</span></div><div class="shelf-grid" id="newGrid"></div></div>
-      <div class="shelf" id="recentShelf" hidden><div class="shelf-heading"><h2>Recently played</h2><span>Jump back in</span></div><div class="shelf-grid" id="recentGrid"></div></div>
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-noise"></div><div class="hero-grid"></div><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      <div class="hero-copy"><p class="eyebrow reveal-line"><span>01</span> A living arcade / 2026</p><h1 id="heroTitle" class="hero-title">PLAY<br><em>WITHOUT</em><br>LIMITS<span>.</span></h1><p id="heroDesc" class="hero-desc">A curated collection of strange, satisfying and beautifully unfinished worlds. Find your next five-minute obsession.</p><div class="hero-actions"><a class="button button-primary magnetic" href="#library">Enter the library <span>↘</span></a><button id="featuredLaunchBtn" class="button button-quiet magnetic" type="button">Loading featured <span>↗</span></button></div></div>
+      <div class="hero-visual" id="heroArt" aria-label="Featured game artwork"><div class="hero-frame"><div class="hero-frame-label"><span>NOW PLAYING</span><b id="heroGameLabel">GAMEHUB / 001</b></div><div class="hero-emblem">✦</div><div class="hero-frame-footer"><span>EXPLORE THE UNKNOWN</span><span>SCROLL TO DISCOVER ↓</span></div></div></div>
+      <a class="scroll-cue" href="#library"><span>Scroll to play</span><i></i></a>
     </section>
 
-    <!-- Cards -->
-    <div class="library-subheading"><h2>All games</h2><span>Search the complete collection</span></div>
-    <div class="grid" id="grid"></div>
-    <p class="empty-state" id="emptyState" hidden>No games match your search. 🎮</p>
+    <section class="marquee" aria-label="GameHUB themes"><div class="marquee-track"><span>PUZZLE</span><b>✦</b><span>ARCADE</span><b>✦</b><span>STRATEGY</span><b>✦</b><span>SKILL</span><b>✦</b><span>PUZZLE</span><b>✦</b><span>ARCADE</span><b>✦</b><span>STRATEGY</span><b>✦</b></div></section>
+
+    <section class="library section-shell" id="library">
+      <div class="section-heading"><div><p class="eyebrow"><span>02</span> The collection</p><h2>Choose your<br><em>next world.</em></h2></div><p id="libraryCount" class="section-note">Loading games...</p></div>
+      <div class="library-toolbar"><label class="search-box"><span>⌕</span><input type="search" id="searchInput" placeholder="Search the arcade" autocomplete="off"></label><div class="filters" id="filterChips" aria-label="Filter games"></div></div>
+      <div class="featured-strip" id="featuredStrip"></div><div class="grid" id="grid"></div><p class="empty-state" id="emptyState" hidden>No games match this signal.</p>
+    </section>
+
+    <section class="spotlight" id="spotlight"><div class="spotlight-pin"><div class="spotlight-intro"><p class="eyebrow"><span>03</span> Spotlight / inside the worlds</p><h2>Small games.<br><em>Big feelings.</em></h2><p>Every title starts as a question: what would make one more round impossible to resist?</p></div><div class="spotlight-rail" id="spotlightRail"></div><div class="spotlight-progress"><span></span></div></div></section>
+
+    <section class="trailer section-shell" id="trailer"><div class="trailer-copy"><p class="eyebrow"><span>04</span> The mood</p><h2>Made for the<br><em>in-between.</em></h2><p>Play a quick round between meetings. Lose an hour after midnight. GameHUB is a cabinet of compact worlds with room to surprise you.</p><a class="text-link" href="#library">Browse every game <span>↗</span></a></div><div class="trailer-stage" id="trailerStage"><div class="scanline"></div><div class="play-orb" id="playOrb"><span>▶</span></div><div class="trailer-caption"><span>GAMEHUB / SIGNAL 001</span><b>PRESS TO TRANSMIT</b></div></div></section>
+
+    <section class="stats-section section-shell" id="manifesto"><div class="section-heading"><div><p class="eyebrow"><span>05</span> The archive</p><h2>Built to be<br><em>played.</em></h2></div><p class="section-note">New experiments arrive<br>when inspiration strikes.</p></div><div class="stats-grid"><div class="stat"><strong data-count="20">0</strong><span>worlds online</span></div><div class="stat"><strong data-count="8">0</strong><span>genres to explore</span></div><div class="stat"><strong data-count="30">0</strong><span>levels to conquer</span></div><div class="stat"><strong data-count="100">0</strong><span>reasons to replay</span></div></div></section>
   </main>
 
-  <footer class="footer">
-    <p>Game<em>HUB</em> — your arcade of in-progress creations.</p>
-    <p class="muted">Built with 💙 | More games landing soon.</p>
-  </footer>
+  <footer class="site-footer"><div class="footer-top"><div><a class="brand" href="/"><span class="brand-symbol">G<span>H</span></span><span class="brand-name">GAME<span>HUB</span></span></a><p>A living arcade for curious players.</p></div><div class="footer-links"><a class="magnetic" href="#library">Library ↗</a><a class="magnetic" href="#spotlight">Spotlight ↗</a><a class="magnetic" href="mailto:hello@gamehub.local">Say hello ↗</a></div></div><div class="footer-bottom"><span>© 2026 GAMEHUB / MADE FOR PLAY</span><span>PRESS <b>ESC</b> TO RESET YOUR FOCUS</span></div></footer>
 
-  <!-- Toast for coming-soon games -->
-  <div class="toast" id="toast">⏳ Coming soon — stay tuned!</div>
-
-  <!-- Modal for live-game details -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal-card">
-      <h2 id="modalTitle">Game</h2>
-      <p id="modalDesc" class="muted"></p>
-      <div class="modal-meta" id="modalMeta"></div>
-      <div class="modal-actions">
-        <a id="modalPlay" class="btn btn-primary" href="#" target="_blank" rel="noopener">▶ Play Now</a>
-        <button id="modalClose" class="btn btn-ghost">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <div class="modal" id="modal" hidden><div class="modal-card"><button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button><p class="eyebrow">Game dossier</p><h2 id="modalTitle">Game</h2><p id="modalDesc"></p><div class="modal-meta" id="modalMeta"></div><a id="modalPlay" class="button button-primary" href="#" target="_blank" rel="noopener">Play now <span>↗</span></a></div></div><div class="toast" id="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script><script src="script.js"></script>
 </body>
 </html>

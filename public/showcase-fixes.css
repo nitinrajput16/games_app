@@ -1,0 +1,3 @@
+.hero{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-width:0}.hero-copy,.hero-visual{min-width:0}.hero-title{max-width:100%;overflow-wrap:break-word;word-break:normal}.hero-desc{position:relative;z-index:2}.hero-visual{overflow:visible}.hero-frame{max-width:100%}
+@media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero-title{max-width:9ch}.hero-visual{pointer-events:none}}
+@media(max-width:640px){.hero-title{max-width:7ch;letter-spacing:-.09em}.hero-desc{max-width:32ch}.hero-actions .button{min-height:48px}}
